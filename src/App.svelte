@@ -1,10 +1,27 @@
 <script>
 	export let name;
+
+	let rando;
+
+	function setRando() {
+		rando = Math.random();
+	}
+
+	$: result = Math.round(rando) ? 'Winner' : 'Loser';
 </script>
 
 <main>
 	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+
+	<p>The random number is {rando}</p>
+	
+	<button on:click={setRando}>Randomize</button>
+	
+	<p>You are {result}</p>
+
+	<input bind:value={rando}>
+
+
 </main>
 
 <style>
