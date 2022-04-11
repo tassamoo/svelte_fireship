@@ -1,4 +1,5 @@
 <script>
+	import { fade, fly} from "svelte/transition";
 	export let name;
 
 	let rando;
@@ -7,7 +8,7 @@
 		rando = Math.random();
 	}
 
-	$: result = Math.round(rando) ? 'Winner' : 'Loser';
+	$: result = Math.round(rando * 100);
 </script>
 
 <main>
@@ -17,10 +18,15 @@
 	
 	<button on:click={setRando}>Randomize</button>
 	
-	<p>You are {result}</p>
+	<p>Your score is {result}</p>
 
-	<input bind:value={rando}>
-
+	{#if result> 75}
+		<p>Big Winner top 25%</p>
+	{:else if result > 50}
+		<p transition:fade>Decent, top 50%</p>
+	{:else}
+		<p>Loserrrrr</p>
+	{/if}
 
 </main>
 
