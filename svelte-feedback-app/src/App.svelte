@@ -3,14 +3,30 @@
 	let lastName = "Akhsan";
 	let color = "blue";
 	let showText = false;
+	let users = [
+		{
+			id: '1',
+			name: 'John'
+		},
+		{
+			id: '2',
+			name: 'Sara'
+		},
+		{
+			id: '3',
+			name: 'Bob'
+		},
+	]
 
 
 	//create reactive value
 	$: name = firstName + " " + lastName;
+
 	const toggle = () => {
 		color = color === "blue" ? "red" : "blue";
 		showText = !showText
-	};
+		users = [...users, {id: '4',name:'Jane'}]
+	}
 
 </script>
 
@@ -22,6 +38,10 @@
 		<p>Click the button to toggle the text.</p>
 	{/if}
 	<button on:click={toggle}>click</button>
+
+	{#each users as user (user.id)}
+		<h3>{user.id}: {user.name}</h3>
+	{/each}
 </main>
 
 <style>
